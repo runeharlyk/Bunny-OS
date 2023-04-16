@@ -1,7 +1,7 @@
 
-export type ProcessType = "" | "Task Manager" | "Browser" | "Camera"
+export type ProcessType = "" | "Task Manager" | "Browser" | "Camera" | "File Explore"
 
-export type Icon = "Globe" | "Camera" | "ChartLine" | "Dashboard"
+export type Icon = "Globe" | "Camera" | "ChartLine" | "Dashboard" | "Folder"
 
 export interface Process {
   id: number;
