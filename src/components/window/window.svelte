@@ -8,7 +8,7 @@
 	import CameraApp from "../app/camera/camera.svelte";
 
 	const openProgram = (type:ProcessType, icon:Icon) => {
-		let process:Process = {id:(Math.random() * 10000), type, background:false, icon}
+		let process:Process = {id:(Math.random() * 10000), type, background:false, icon, minimized:false}
 		processes.update(p => [...p, process])
 	}
 
@@ -23,19 +23,29 @@
 </svelte:head>
 
 <main>
-	{#each $processes as process, index}
+	{#each $processes as process}
 		{#if process.type === "Task Manager"}
-			<TaskManager on:close={() => closeProgram(process.id)}></TaskManager>
+			<TaskManager on:close={() => closeProgram(process.id)} process={process}></TaskManager>
 		{:else if process.type === "Browser"}
-			<Browser on:close={() => closeProgram(process.id)}></Browser>
+			<Browser on:close={() => closeProgram(process.id)} process={process}></Browser>
 		{:else if process.type === "Camera"}
-			<CameraApp on:close={() => closeProgram(process.id)}></CameraApp>
+			<CameraApp on:close={() => closeProgram(process.id)} process={process}></CameraApp>
 		{/if}
 	{/each}
-	<button on:click={() => openProgram("Task Manager", "ChartLine")}><PresentationChartLine size="30"/></button>
-	
-	<button on:click={() => openProgram("Browser", "Globe")}><GlobeAlt size="30"/></button>
-	<button on:click={() => openProgram("Camera", "Camera")}><Camera size="30"/></button>
+	<div class="grid grid-cols-12 grid-rows-6 h-full">
+		<button class="flex flex-col justify-center items-center hover:bg-slate-700" on:click={() => openProgram("Task Manager", "ChartLine")}>
+			<PresentationChartLine size="40"/>
+			Task Manager
+		</button>
+		<button class="flex flex-col justify-center items-center hover:bg-slate-700" on:click={() => openProgram("Browser", "Globe")}>
+			<GlobeAlt size="40"/>
+			Browser
+		</button>
+		<button class="flex flex-col justify-center items-center hover:bg-slate-700" on:click={() => openProgram("Camera", "Camera")}>
+			<Camera size="40"/>
+			Camera
+		</button>
+	</div>
 	
 	<Tabbar></Tabbar>
 </main>

@@ -2,6 +2,8 @@
     import { PresentationChartLine, ChartBar, Squares2x2, AdjustmentsHorizontal, Bars3 } from "svelte-heros";
     import App from '../app.svelte';
 	import Processes from "./processes/processes.svelte";
+	import type { Process } from "../../../models";
+    export let process:Process;
 
     let menuOpen = false;
     let open = "processes";
@@ -13,12 +15,12 @@
     let tabs = ["processes", "performance", "startup apps"]
 </script>
 
-<App on:close>
+<App on:close process={process}>
     <div slot="icon"><PresentationChartLine/></div>
     <span slot="app-name">Task manager</span>
 
     <div slot="content" class="flex h-full">
-        <div class="flex flex-col {menuOpen?"w-14":"w-60"} pl-4 gap-4 flex-wrap overflow-hidden transition-all">
+        <div class="flex flex-col {menuOpen?"w-14":"w-60"} pl-4 gap-4 flex-wrap transition-all">
             <button class="flex gap-4" on:click={toggleMenu}><Bars3/></button>
             <button class="flex gap-4"><Squares2x2/>Processes</button>
             <button class="flex gap-4"><ChartBar/>Performance</button>

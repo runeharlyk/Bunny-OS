@@ -1,5 +1,5 @@
 <script>
-    import { processes } from "../../store";
+    import { processes, focusedProcess } from "../../store";
     import { SpeakerWave, Sun, ChatBubbleLeft } from "svelte-heros";
 	import Icon from "../icon.svelte";
 </script>
@@ -12,7 +12,9 @@
     </div>
     <div class="flex flex-1 justify-center items-center">
         {#each $processes.filter((p) => !p.background) as process, index}
-            <button class="flex justify-center items-center hover:bg-neutral-700 h-full w-12" title="{process.name}">
+            <button 
+                on:click={() => process.minimized = !process.minimized} 
+                class="flex justify-center items-center hover:bg-neutral-700 h-full w-12 {$focusedProcess === process.type ? "bg-neutral-700":""}" title="{process.name}">
                 <Icon type={process.icon}/>
             </button>
         {/each}
