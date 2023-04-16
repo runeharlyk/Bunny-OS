@@ -7,4 +7,4 @@
 	<meta name="description" content="Browser base OS" />
 </svelte:head>
 
-<Window></Window>
+<Window />
