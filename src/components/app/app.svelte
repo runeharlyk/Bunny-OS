@@ -65,21 +65,17 @@
 
 <div
 	class="touch-none resize-none hover:resize w-1/3 h-1/3 absolute select-none transition-[transform,opacity]"
-	style="width:{fullScreen ? window.screen.availWidth : width}px; height:{fullScreen
-		? window.screen.availHeight
-		: height}px; left: {fullScreen ? 0 : left}px; top: {fullScreen
-		? 0
-		: top}px; transform: translate({process.minimized
-		? `calc(100% - ${left}px)`
-		: '0'}, {process.minimized ? `calc(80vw - ${top}px)` : '0'}); opacity:{process.minimized
-		? 0
-		: 1}"
+	style="width:{fullScreen ? "100%" : `${width}px`}; 
+		height:{fullScreen ? "calc(100% - 48px)" : `${height}px`}; 
+		left: {fullScreen ? 0 : left}px; 
+		top: {fullScreen ? 0: top}px; 
+		transform: translate({process.minimized	? `calc(100% - ${left}px)` : '0'}, {process.minimized ? `calc(80vw - ${top}px)` : '0'}); 
+		opacity:{process.minimized ? 0 : 1}"
 >
 	<Resizer bind:width bind:height bind:top_ab={top} bind:left_ab={left} />
 	<div
-		class="flex flex-col bg-gray-400 backdrop-filter backdrop-blur-2xl bg-opacity-10 h-full {fullScreen
-			? ''
-			: 'rounded-lg'}"
+		class="flex flex-col bg-gray-400 backdrop-filter backdrop-blur-2xl bg-opacity-10 h-full 
+		{fullScreen	? '' : 'rounded-lg'}"
 	>
 		<div class="flex">
 			<div
@@ -88,6 +84,7 @@
 				on:touchstart={onMouseDown}
 				on:touchmove={onTouchMove}
 				on:touchend={onMouseUp}
+				on:dblclick={toggleMaximize}
 			>
 				<div><slot name="icon" /></div>
 				<div><slot name="app-name" /></div>
@@ -106,7 +103,7 @@
 				>
 			</div>
 		</div>
-		<div class="w-full h-full" on:click={setWindowFocus} on:keypress={setWindowFocus}>
+		<div class="w-full flex-1" on:click={setWindowFocus} on:keypress={setWindowFocus}>
 			<slot name="content" />
 		</div>
 	</div>

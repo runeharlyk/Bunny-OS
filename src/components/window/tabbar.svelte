@@ -16,10 +16,8 @@
 		{#each $processes.filter((p) => !p.background) as process, index}
 			<button
 				on:click={() => (process.minimized = !process.minimized)}
-				class="flex justify-center items-center hover:bg-neutral-700 h-full w-12 {$focusedProcess ===
-				process.type
-					? 'bg-neutral-700'
-					: ''}"
+				class="flex justify-center items-center hover:bg-neutral-700 h-full w-12 
+				{$focusedProcess === process.type ? 'bg-neutral-700' : ''}"
 				title={process.name}
 			>
 				<Icon type={process.icon} />

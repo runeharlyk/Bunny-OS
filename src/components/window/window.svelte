@@ -4,12 +4,14 @@
 	import TaskManager from '../app/taskManager/taskManager.svelte';
 	import Browser from '../app/browser/browser.svelte';
 	import { processes } from '../../store';
-	import type { Process, ProcessType, Icon } from '../../models';
+	import type { Process, ProcessType, Icon as IconType } from '../../models';
 	import CameraApp from '../app/camera/camera.svelte';
 	import FileExplore from '../app/fileExplore/fileExplore.svelte';
 	import Editor from '../app/editor/editor.svelte';
+	import Calculator from '../app/calculator/calculator.svelte';
+	import Icon from '../icon.svelte';
 
-	const openProgram = (type: ProcessType, icon: Icon) => {
+	const openProgram = (type: ProcessType, icon: IconType) => {
 		let process: Process = {
 			id: Math.random() * 10000,
 			type,
@@ -42,6 +44,8 @@
 			<FileExplore on:close={() => closeProgram(process.id)} {process} />
 		{:else if process.type === 'Editor'}
 			<Editor on:close={() => closeProgram(process.id)} {process} />
+		{:else if process.type === 'Calculator'}
+			<Calculator on:close={() => closeProgram(process.id)} {process} />
 		{/if}
 	{/each}
 	<div class="grid grid-cols-12 grid-rows-6 h-full">
@@ -79,6 +83,13 @@
 		>
 			<CodeBracket size="40" />
 			Vs Code
+		</button>
+		<button
+			class="flex flex-col justify-center items-center hover:bg-slate-700"
+			on:click={() => openProgram('Calculator', 'Calculator')}
+		>
+			<Icon type="Calculator" size="40" />
+			Calculater
 		</button>
 	</div>
 
