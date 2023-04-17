@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GlobeAlt, PresentationChartLine, Camera, Squares2x2, Folder } from 'svelte-heros';
+	import { GlobeAlt, PresentationChartLine, Camera, Squares2x2, Folder, CodeBracket } from 'svelte-heros';
 	import type { Icon } from '../models';
 	export let type: Icon = 'Globe';
 </script>
@@ -15,6 +15,8 @@
 		<Squares2x2 size="20" />
 	{:else if type === 'Folder'}
 		<Folder size="20" />
+	{:else if type === 'Code'}
+		<CodeBracket size="20" />
 	{:else}
 		<Squares2x2 size="20" color="red" />
 	{/if}

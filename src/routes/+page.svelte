@@ -1,5 +1,10 @@
-<script>
+<script lang="ts">
+	import { onMount } from 'svelte';
 	import Window from '../components/window/window.svelte';
+
+	onMount(async () => {
+		await (navigator as any).wakeLock.request("screen");
+	})
 </script>
 
 <svelte:head>

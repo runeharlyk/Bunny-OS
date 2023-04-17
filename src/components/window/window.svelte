@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GlobeAlt, PresentationChartLine, Camera, Folder } from 'svelte-heros';
+	import { GlobeAlt, PresentationChartLine, Camera, Folder, CodeBracket } from 'svelte-heros';
 	import Tabbar from './tabbar.svelte';
 	import TaskManager from '../app/taskManager/taskManager.svelte';
 	import Browser from '../app/browser/browser.svelte';
@@ -7,6 +7,7 @@
 	import type { Process, ProcessType, Icon } from '../../models';
 	import CameraApp from '../app/camera/camera.svelte';
 	import FileExplore from '../app/fileExplore/fileExplore.svelte';
+	import Editor from '../app/editor/editor.svelte';
 
 	const openProgram = (type: ProcessType, icon: Icon) => {
 		let process: Process = {
@@ -39,6 +40,8 @@
 			<CameraApp on:close={() => closeProgram(process.id)} {process} />
 		{:else if process.type === 'File Explore'}
 			<FileExplore on:close={() => closeProgram(process.id)} {process} />
+		{:else if process.type === 'Editor'}
+			<Editor on:close={() => closeProgram(process.id)} {process} />
 		{/if}
 	{/each}
 	<div class="grid grid-cols-12 grid-rows-6 h-full">
@@ -69,6 +72,13 @@
 		>
 			<Folder size="40" />
 			File Explore
+		</button>
+		<button
+			class="flex flex-col justify-center items-center hover:bg-slate-700"
+			on:click={() => openProgram('Editor', 'Code')}
+		>
+			<CodeBracket size="40" />
+			Vs Code
 		</button>
 	</div>
 
