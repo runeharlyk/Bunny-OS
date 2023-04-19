@@ -28,3 +28,7 @@ export type tab = {
   icon: Icon;
   component: ComponentType;
 };
+
+export type performancetab = tab & {
+  summary?: string;
+};
