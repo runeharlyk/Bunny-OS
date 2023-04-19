@@ -1,5 +1,5 @@
 <script lang="ts">
-	import App from '../app.svelte';
+	import App from '../+page.svelte';
 	import type { Process } from '../../../models';
 	import Icon from '../../icon.svelte';
 	import {

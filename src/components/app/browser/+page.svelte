@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { GlobeAlt } from 'svelte-heros';
-	import App from '../app.svelte';
+	import Icon from '../../icon.svelte';
+	import App from '../+page.svelte';
 	import type { Process } from '../../../models';
 	export let process: Process;
 </script>
 
 <App on:close {process}>
-	<div slot="icon"><GlobeAlt /></div>
+	<div slot="icon"><Icon type="Globe" size="25" /></div>
 	<span slot="app-name">Browser</span>
 
 	<div slot="content" class="h-full">

@@ -6,7 +6,9 @@
 		Squares2x2,
 		Folder,
 		CodeBracket,
-		Calculator
+		Calculator,
+		ChartBar,
+		Bars3
 	} from 'svelte-heros';
 	import type { Icon } from '../models';
 	export let type: Icon = 'Globe';
@@ -28,6 +30,10 @@
 		<CodeBracket {size} />
 	{:else if type === 'Calculator'}
 		<Calculator {size} />
+	{:else if type === 'Chart'}
+		<ChartBar {size} />
+	{:else if type === 'Hamburger'}
+		<Bars3 {size} />
 	{:else}
 		<Squares2x2 {size} color="red" />
 	{/if}
