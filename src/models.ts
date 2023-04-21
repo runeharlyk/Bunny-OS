@@ -2,7 +2,7 @@ import type { ComponentType } from "svelte";
 
 export type ProcessType = "" | "Task Manager" | "Browser" | "Camera" | "File Explore" | "Editor" | "Calculator"
 
-export type Icon = "Globe" | "Camera" | "ChartLine" | "Dashboard" | "Folder" | "Code" | "Calculator" | "Chart" | "Hamburger"
+export type Icon = "Globe" | "Camera" | "ChartLine" | "Dashboard" | "Folder" | "Code" | "Calculator" | "Chart" | "Hamburger" | "Shield-Exclamation"
 
 export interface Process {
   id: number;

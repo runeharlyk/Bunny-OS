@@ -2,7 +2,7 @@
 	import { focusedProcess, processes } from '../../store';
 	import { XMark, Minus, Stop } from 'svelte-heros';
 	import { createEventDispatcher, onMount } from 'svelte';
-	import type { Process, ProcessType } from '../../models';
+	import type { Process } from '../../models';
 	import Resizer from './resizer.svelte';
 	export let process: Process;
 	export let left = 100;
@@ -65,17 +65,19 @@
 
 <div
 	class="touch-none resize-none hover:resize w-1/3 h-1/3 absolute select-none transition-[transform,opacity]"
-	style="width:{fullScreen ? "100%" : `${width}px`}; 
-		height:{fullScreen ? "calc(100% - 48px)" : `${height}px`}; 
+	style="width:{fullScreen ? '100%' : `${width}px`}; 
+		height:{fullScreen ? 'calc(100% - 48px)' : `${height}px`}; 
 		left: {fullScreen ? 0 : left}px; 
-		top: {fullScreen ? 0: top}px; 
-		transform: translate({process.minimized	? `calc(100% - ${left}px)` : '0'}, {process.minimized ? `calc(80vw - ${top}px)` : '0'}); 
+		top: {fullScreen ? 0 : top}px; 
+		transform: translate({process.minimized ? `calc(100% - ${left}px)` : '0'}, {process.minimized
+		? `calc(80vw - ${top}px)`
+		: '0'}); 
 		opacity:{process.minimized ? 0 : 1}"
 >
 	<Resizer bind:width bind:height bind:top_ab={top} bind:left_ab={left} />
 	<div
-		class="flex flex-col bg-gray-400 backdrop-filter backdrop-blur-2xl bg-opacity-10 h-full 
-		{fullScreen	? '' : 'rounded-lg'}"
+		class="flex flex-col bg-gray-400 backdrop-filter backdrop-blur-2xl bg-opacity-10 h-full
+		{fullScreen ? '' : 'rounded-lg'}"
 	>
 		<div class="flex">
 			<div
