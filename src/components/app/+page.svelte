@@ -14,8 +14,8 @@
 	let fullScreen = false;
 
 	onMount(async () => {
-		width = window.screen.availWidth / 2;
-		height = window.screen.availHeight / 2;
+		width = window.innerWidth / 2;
+		height = window.innerHeight / 2;
 		setWindowFocus();
 	});
 
@@ -64,7 +64,7 @@
 </script>
 
 <div
-	class="touch-none resize-none hover:resize w-1/3 h-1/3 absolute select-none transition-[transform,opacity]"
+	class="touch-none resize-none hover:resize w-1/3 h-1/3 absolute select-none transition-[transform,opacity] z-10"
 	style="width:{fullScreen ? '100%' : `${width}px`}; 
 		height:{fullScreen ? 'calc(100% - 48px)' : `${height}px`}; 
 		left: {fullScreen ? 0 : left}px; 

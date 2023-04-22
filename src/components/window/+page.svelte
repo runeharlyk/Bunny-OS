@@ -3,22 +3,26 @@
 	import TaskManager from '../app/taskManager/+page.svelte';
 	import Browser from '../app/browser/+page.svelte';
 	import { processes } from '../../store';
-	import type { Process, ProcessType, Icon as IconType, app } from '../../models';
+	import type { Process, app } from '../../models';
 	import CameraApp from '../app/camera/+page.svelte';
 	import FileExplore from '../app/fileExplore/+page.svelte';
 	import Editor from '../app/editor/+page.svelte';
 	import Calculator from '../app/calculator/+page.svelte';
 	import AppIconButton from './appIconButton.svelte';
 	import { arrayBufferToBase64Img } from '$lib/utils';
+	import type { FileModel } from '../../db';
 
-	const openProgram = (type: ProcessType, component: ComponentType, icon: IconType) => {
+	let files: app[] = [];
+
+	const openProgram = (app: app) => {
 		let process: Process = {
 			id: Math.random() * 10000,
-			component,
-			type,
+			component: app.component,
+			type: app.type,
 			background: false,
-			icon,
-			minimized: false
+			icon: app.icon,
+			minimized: false,
+			data: app.data
 		};
 		processes.update((p) => [...p, process]);
 	};
@@ -72,6 +76,58 @@
 			data: 'runeharlyk.dk'
 		}
 	];
+
+	const dropHandler = async (ev: DragEvent) => {
+		ev.preventDefault();
+		ev.stopPropagation();
+		let file: FileModel = { name: '', path: '/', size: 0 };
+		const fileReader = new FileReader();
+		fileReader.onload = () => {
+			const srcData = fileReader.result;
+			file.content = srcData as ArrayBuffer;
+			let fileShortcut: app = {
+				name: file.name,
+				type: 'File Explore',
+				icon: arrayBufferToBase64Img(file.content),
+				component: Browser,
+				data: file
+			};
+			files = [...files, fileShortcut];
+		};
+
+		if (ev.dataTransfer?.items.length) {
+			let firstFile = ev.dataTransfer?.items[0].getAsFile();
+			if (firstFile) {
+				file.name = firstFile.name;
+				file.mime = firstFile.type;
+				file.size = firstFile.size;
+				let stream = firstFile?.stream();
+				let reader = stream?.getReader();
+				let filecontent = await reader?.read();
+				if (filecontent?.value) {
+					fileReader.readAsArrayBuffer(new Blob([filecontent?.value]));
+				}
+			}
+
+			// Use DataTransferItemList interface to access the file(s)
+			[...ev.dataTransfer.items].forEach((item, i) => {
+				// If dropped items aren't files, reject them
+				if (item.kind === 'file') {
+					const file = item.getAsFile();
+					console.log(`items: file[${i}].name = ${file?.name}`);
+				}
+			});
+		} else {
+			// Use DataTransfer interface to access the file(s)
+			[...ev.dataTransfer!.files].forEach((file, i) => {
+				console.log(`files: file[${i}].name = ${file.name}`);
+			});
+		}
+	};
+
+	function dragOverHandler(ev: DragEvent) {
+		ev.preventDefault();
+	}
 </script>
 
 <svelte:head>
@@ -87,15 +143,12 @@
 			{process}
 		/>
 	{/each}
-	<div class="grid grid-cols-12 grid-rows-6 h-full">
-		{#each apps as app}
-			<button
-				class="flex flex-col justify-center items-center hover:bg-slate-700"
-				on:click={() => openProgram(app.name, app.component, app.icon)}
-			>
-				<Icon type={app.icon} size="40" />
-				{app.name}
-			</button>
+	<div class="h-full relative" on:drop={dropHandler} on:dragover={dragOverHandler}>
+		{#each apps as app, x}
+			<AppIconButton {app} {x} on:click={() => openProgram(app)} />
+		{/each}
+		{#each files as file, x}
+			<AppIconButton app={file} {x} y={1} on:click={() => openProgram(file)} />
 		{/each}
 	</div>
 	<Tabbar />
