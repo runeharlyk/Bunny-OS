@@ -10,23 +10,20 @@ export interface Process {
   type: ProcessType;
   background: boolean;
   minimized: boolean;
-  icon?: Icon;
+  icon?: Icon | string;
   name?: string;
-  cpu?:number;
-  memory?: number;
-  network?: string;
+  data?: unknown;
 }
-
-export type app = {
-  name: ProcessType;
-  icon: Icon;
-  component: ComponentType;
-};
 
 export type tab = {
   name: string;
-  icon: Icon;
+  icon: Icon | string;
   component: ComponentType;
+  data?: unknown;
+};
+
+export type app = tab & {
+  type: ProcessType;
 };
 
 export type performancetab = tab & {

@@ -8,8 +8,8 @@
 	import FileExplore from '../app/fileExplore/+page.svelte';
 	import Editor from '../app/editor/+page.svelte';
 	import Calculator from '../app/calculator/+page.svelte';
-	import Icon from '../icon.svelte';
-	import type { ComponentType } from 'svelte';
+	import AppIconButton from './appIconButton.svelte';
+	import { arrayBufferToBase64Img } from '$lib/utils';
 
 	const openProgram = (type: ProcessType, component: ComponentType, icon: IconType) => {
 		let process: Process = {
@@ -30,33 +30,46 @@
 	let apps: app[] = [
 		{
 			name: 'Task Manager',
+			type: 'Task Manager',
 			icon: 'ChartLine',
 			component: TaskManager
 		},
 		{
 			name: 'Browser',
+			type: 'Browser',
 			icon: 'Globe',
 			component: Browser
 		},
 		{
 			name: 'Camera',
+			type: 'Camera',
 			icon: 'Camera',
 			component: CameraApp
 		},
 		{
 			name: 'File Explore',
+			type: 'File Explore',
 			icon: 'Folder',
 			component: FileExplore
 		},
 		{
 			name: 'Editor',
+			type: 'Editor',
 			icon: 'Code',
 			component: Editor
 		},
 		{
 			name: 'Calculator',
+			type: 'Calculator',
 			icon: 'Calculator',
 			component: Calculator
+		},
+		{
+			name: 'Runeharlyk.dk',
+			type: 'Browser',
+			icon: 'Globe',
+			component: Browser,
+			data: 'runeharlyk.dk'
 		}
 	];
 </script>

@@ -12,7 +12,7 @@
 		ShieldExclamation
 	} from 'svelte-heros';
 	import type { Icon } from '../models';
-	export let type: Icon = 'Globe';
+	export let type: Icon | string = 'Globe';
 	export let size = '20';
 	let className: string = '';
 	export { className as class };
@@ -40,6 +40,6 @@
 	{:else if type === 'Shield-Exclamation'}
 		<ShieldExclamation {size} class={className} />
 	{:else}
-		<Squares2x2 {size} class={className} color="red" />
+		<img height={size} width={size} src={type} alt={type} />
 	{/if}
 </slot>

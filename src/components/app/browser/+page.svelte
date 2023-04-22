@@ -2,13 +2,15 @@
 	import Icon from '../../icon.svelte';
 	import App from '../+page.svelte';
 	import type { Process } from '../../../models';
+	import { arrayBufferToBase64Img } from '$lib/utils';
 	export let process: Process;
 
-	let inputUrl = 'www.google.com/webhp?igu=1';
+	let inputUrl = (process.data as string) || 'www.google.com/webhp?igu=1';
 	let historyIndex = 0;
-	let history: string[] = ['www.google.com/webhp?igu=1'];
+	let history: string[] = [inputUrl];
 	let reload = {};
 	let couldLoad = true;
+	let favicon = 'Globe';
 	let shouldProxy = false;
 	let proxy = 'https://corsproxy.io/?';
 
@@ -36,12 +38,27 @@
 		couldLoad = true;
 		inputUrl = history[historyIndex];
 		reload = {};
+		// TODO add CORS proxy for some/all tpc calls
+		//getFavIcon();
 	};
 
 	const handleErrors = () => {
 		couldLoad = false;
 		history.splice(historyIndex, 1);
 		reload = {};
+	};
+
+	const getFavIcon = () => {
+		let hostname = new URL(`https://${inputUrl}`).hostname;
+		fetch(`https://${hostname}/favicon.ico`)
+			.then((response) => response.blob())
+			.then((blob) => {
+				var reader = new FileReader();
+				reader.onload = () => {
+					favicon = arrayBufferToBase64Img(reader.result as ArrayBuffer);
+				};
+				reader.readAsDataURL(blob);
+			});
 	};
 </script>
 
