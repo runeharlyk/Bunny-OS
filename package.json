@@ -42,6 +42,7 @@
 		"*.{js,css,md}": "prettier --write"
 	},
 	"dependencies": {
+		"dexie": "^4.0.1-alpha.10",
 		"monaco-editor": "^0.37.1"
 	}
 }
