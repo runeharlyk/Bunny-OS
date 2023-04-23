@@ -10,7 +10,7 @@
 	let usedSpace: string | undefined;
 	let w = window as any;
 	let entries: string[] = [];
-	let usbDevices: any[] = [];
+	let usbDevices: USBDevice[] = [];
 
 	onMount(async () => {
 		// Get access to specific directory
@@ -31,11 +31,11 @@
 		console.log(storage);
 		console.log(directoryHandle);
 
-		navigator.usb.addEventListener('connect', (event: any) => {
+		navigator.usb?.addEventListener('connect', (event: any) => {
 			console.log(event);
 		});
 
-		navigator.usb.addEventListener('disconnect', (event: any) => {
+		navigator.usb?.addEventListener('disconnect', (event: any) => {
 			console.log(event);
 		});
 		getUsbDevices();
@@ -77,11 +77,11 @@
 	};
 
 	const getUsbDevices = async () => {
-		usbDevices = await navigator.usb.getDevices();
+		usbDevices = (await navigator.usb?.getDevices()) || [];
 	};
 
 	const addNewUsbDevices = async () => {
-		await navigator.usb.requestDevice({ filters: [] });
+		await navigator.usb?.requestDevice({ filters: [] });
 	};
 </script>
 

@@ -20,12 +20,14 @@
 	});
 
 	const updateSummaries = () => {
-		let usedMemory = Math.round((performance?.memory?.usedJSHeapSize / 1048576) * 10) / 10;
-		let maxMemory = Math.round(performance?.memory?.jsHeapSizeLimit / 1048576);
-		let memorySummery = `${usedMemory}/${maxMemory} MB (${Math.round(
-			(usedMemory / maxMemory) * 100
-		)}%)`;
-		tabs[tabs.findIndex((x) => x.name === 'Memory')].summary = memorySummery;
+		if (performance.memory) {
+			let usedMemory = Math.round((performance?.memory?.usedJSHeapSize / 1048576) * 10) / 10;
+			let maxMemory = Math.round(performance?.memory?.jsHeapSizeLimit / 1048576);
+			let memorySummery = `${usedMemory}/${maxMemory} MB (${Math.round(
+				(usedMemory / maxMemory) * 100
+			)}%)`;
+			tabs[tabs.findIndex((x) => x.name === 'Memory')].summary = memorySummery;
+		}
 	};
 
 	let tabs: performancetab[] = [

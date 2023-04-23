@@ -3,7 +3,9 @@
 	import Window from '../components/window/+page.svelte';
 
 	onMount(async () => {
-		await (navigator as any).wakeLock.request('screen');
+		if ('WakeLock' in navigator) {
+			await (navigator as any).wakeLock.request('screen');
+		}
 	});
 </script>
 
