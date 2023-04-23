@@ -3,6 +3,7 @@
 	import type { performancetab } from '../../../../models';
 	import Cpu from './cpu.svelte';
 	import Memory from './memory.svelte';
+	import Gpu from './gpu.svelte';
 
 	let openIndex = 0;
 	let interval: number;
@@ -54,7 +55,7 @@
 		{
 			name: 'GPU',
 			icon: 'Folder',
-			component: Memory
+			component: Gpu
 		}
 	];
 </script>

@@ -10,7 +10,9 @@
 		"sourceMap": true,
 		"strict": true,
 		"paths": {
-			"*": ["/*.d.ts"]
+			"*": [".//*.d.ts"],
+			"$lib":["./src/lib"],
+			"$lib/*":["./src/lib/*"]
 		},
 		"typeRoots": ["./src/types", "./types"]
 	}
