@@ -87,7 +87,7 @@
 
 <App on:close {process}>
 	<div slot="icon"><Icon type="Folder" /></div>
-	<span slot="app-name">File Explore</span>
+	<span slot="app-name">{process.name}</span>
 
 	<div slot="content" class="flex h-full px-4 flex-col">
 		used space:{usedSpace}<br />

@@ -64,7 +64,7 @@
 
 <App on:close {process}>
 	<div slot="icon"><Icon type="Globe" size="25" /></div>
-	<span slot="app-name">Browser</span>
+	<span slot="app-name">{process.name}</span>
 
 	<div slot="content" class="flex flex-col h-full bg-gray-800">
 		<div class="flex h-8 m-1 pl-4">

@@ -17,7 +17,7 @@
 
 <App on:close {process}>
 	<div slot="icon"><Icon type="Camera" size="25" /></div>
-	<span slot="app-name">Camera</span>
+	<span slot="app-name">{process.name}</span>
 	<div slot="content" class="h-full flex">
 		<div class="h-full flex-1 justify-center items-center">
 			<!-- svelte-ignore a11y-media-has-caption -->

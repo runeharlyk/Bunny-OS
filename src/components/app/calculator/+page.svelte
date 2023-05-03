@@ -53,7 +53,7 @@
 
 <App on:close {process}>
 	<div slot="icon"><Icon type="Calculator" /></div>
-	<span slot="app-name">Calculater</span>
+	<span slot="app-name">{process.name}</span>
 
 	<div slot="content" class="flex h-full px-4 flex-col bg-gradient-to-t from-slate-800">
 		<div class="h-1/4 text-right">

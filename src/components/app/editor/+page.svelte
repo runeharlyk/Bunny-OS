@@ -51,7 +51,7 @@
 
 <App on:close {process}>
 	<div slot="icon"><Icon type="Folder" /></div>
-	<span slot="app-name">Code</span>
+	<span slot="app-name">{process.name}</span>
 
 	<div slot="content" class="flex h-full flex-col overflow-hidden" bind:this={divEl} />
 </App>

@@ -34,7 +34,7 @@
 
 <App on:close {process}>
 	<div slot="icon"><Icon type="Chart" /></div>
-	<span slot="app-name">Task manager</span>
+	<span slot="app-name">{process.name}</span>
 
 	<div slot="content" class="flex h-full">
 		<div class="flex flex-col {menuOpen ? 'w-14' : 'w-60'} gap-4 flex-wrap transition-all">
