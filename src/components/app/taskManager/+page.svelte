@@ -48,7 +48,7 @@
 			{/each}
 		</div>
 		<div class="flex-1 bg-gray-800 rounded-tl-md rounded-br-md">
-			<svelte:component this={tabs[open].component} />
+			<svelte:component this={tabs[open].component} process={process} />
 		</div>
 	</div>
 </App>

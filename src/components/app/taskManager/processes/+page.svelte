@@ -1,13 +1,16 @@
 <script lang="ts">
+	import type { Process } from '../../../../models';
 	import { processes } from '../../../../store';
 	import Icon from '../../../icon.svelte';
+
+	export let process: Process
 </script>
 
 <div class="p-4">
 	<h2 class="mb-4">Apps({$processes.length})</h2>
 	<ul>
-		{#each $processes.filter((p) => !p.background) as process}
-			<li class="flex gap-4"><Icon type={process.icon} />{process.type}</li>
+		{#each $processes.filter((p) => !p.background && p.parent == process.parent) as app}
+			<li class="flex gap-4"><Icon type={app.icon} />{app.type}</li>
 		{/each}
 	</ul>
 

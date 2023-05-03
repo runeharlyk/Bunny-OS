@@ -6,6 +6,7 @@ export type Icon = "Globe" | "Camera" | "ChartLine" | "Dashboard" | "Folder" | "
 
 export interface Process {
   id: number;
+  parent:number;
   component: ComponentType;
   type: ProcessType;
   background: boolean;

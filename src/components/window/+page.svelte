@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Tabbar from './tabbar.svelte';
+	import Taskbar from './taskbar.svelte';
 	import TaskManager from '../app/taskManager/+page.svelte';
 	import Browser from '../app/browser/+page.svelte';
 	import { processes } from '../../store';
@@ -8,15 +8,19 @@
 	import FileExplore from '../app/fileExplore/+page.svelte';
 	import Editor from '../app/editor/+page.svelte';
 	import Calculator from '../app/calculator/+page.svelte';
+	import WM from '../app/vm/+page.svelte'
 	import AppIconButton from './appIconButton.svelte';
 	import { arrayBufferToBase64Img } from '$lib/utils';
 	import type { FileModel } from '../../db';
 
+	export let instance_id:number = Math.random() * 10000;
 	let files: app[] = [];
 
 	const openProgram = (app: app) => {
 		let process: Process = {
 			id: Math.random() * 10000,
+			name: app.name,
+			parent:instance_id,
 			component: app.component,
 			type: app.type,
 			background: false,
@@ -74,6 +78,12 @@
 			icon: 'Globe',
 			component: Browser,
 			data: 'runeharlyk.dk'
+		},
+		{
+			name: 'Bunny OS',
+			type: 'Browser',
+			icon: 'Globe',
+			component: WM
 		}
 	];
 
@@ -136,7 +146,7 @@
 </svelte:head>
 
 <main class="w-full h-full overflow-hidden bg-blue-950">
-	{#each $processes as process}
+	{#each $processes.filter(x => x.parent === instance_id) as process}
 		<svelte:component
 			this={process.component}
 			on:close={() => closeProgram(process.id)}
@@ -151,5 +161,5 @@
 			<AppIconButton app={file} {x} y={1} on:click={() => openProgram(file)} />
 		{/each}
 	</div>
-	<Tabbar />
+	<Taskbar instance_id={instance_id} />
 </main>

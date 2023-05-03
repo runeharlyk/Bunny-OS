@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
 	import { processes, focusedProcess } from '../../store';
 	import { SpeakerWave, Sun, ChatBubbleLeft } from 'svelte-heros';
 	import Icon from '../icon.svelte';
+
+	export let instance_id:number;
 </script>
 
 <div
@@ -13,7 +15,7 @@
 		</button>
 	</div>
 	<div class="flex flex-1 justify-center items-center">
-		{#each $processes.filter((p) => !p.background) as process, index}
+		{#each $processes.filter((p) => !p.background && p.parent === instance_id) as process, index}
 			<button
 				on:click={() => (process.minimized = !process.minimized)}
 				class="flex justify-center items-center hover:bg-neutral-700 h-full w-12 

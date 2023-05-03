@@ -105,8 +105,8 @@
 				>
 			</div>
 		</div>
-		<div class="w-full flex-1" on:click={setWindowFocus} on:keypress={setWindowFocus}>
-			<slot name="content" />
+		<div class="w-full flex-1 relative overflow-hidden" on:click={setWindowFocus} on:keypress={setWindowFocus}>
+			<slot name="content"/>
 		</div>
 	</div>
 </div>
