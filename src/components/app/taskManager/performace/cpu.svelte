@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import Worker from '../../../../lib/cpu-speed.worker?worker';
-	import { Chart, registerables, type ChartConfiguration } from 'chart.js';
+
 	let portfolio: HTMLCanvasElement;
 	let interval: number;
 
@@ -9,50 +8,12 @@
 	let cores: number;
 	let speed: number;
 
-	Chart.register(...registerables);
-
-	const data = {
-		datasets: [
-			{
-				label: 'CPU utilisation ',
-				data: [300, 50, 100],
-				backgroundColor: ['#7000e1', '#fc8800', '#00b0e8'],
-				borderWidth: 0
-			}
-		]
-	};
-	const config: ChartConfiguration = {
-		type: 'line',
-		data: data,
-		options: {
-			responsive: true,
-			plugins: {
-				legend: {
-					position: 'bottom',
-					display: true,
-					labels: {
-						usePointStyle: true,
-						padding: 20,
-						font: {
-							size: 14
-						}
-					}
-				}
-			}
-		}
-	};
 
 	onMount(async () => {
+		const Chart = await import('chart.js/auto');
+		//const Worker = await import('../../../../lib/cpu-speed.worker?worker');
 		cores = navigator.hardwareConcurrency;
-		const worker = new Worker();
-
-		worker.onmessage = (message: any) => {
-			speed = message.data;
-			console.log(message);
-		};
-		worker.postMessage({});
 		const ctx = portfolio.getContext('2d');
-		new Chart(ctx!, config);
 
 		update();
 		setInterval(update, 1000);
