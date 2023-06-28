@@ -10,12 +10,13 @@
 	let history: string[] = [inputUrl];
 	let reload = {};
 	let couldLoad = true;
-	let favicon = 'Globe';
+	let favicon = '';
 	let shouldProxy = false;
 	let proxy = 'https://runeharlyk.dk/proxy/';
 
 	const search = (event: KeyboardEvent) => {
 		if (event.key !== 'Enter' || !inputUrl) return;
+		getFavIcon();
 		history.push(inputUrl);
 		historyIndex++;
 	};
@@ -39,7 +40,7 @@
 		inputUrl = history[historyIndex];
 		reload = {};
 		// TODO add CORS proxy for some/all tpc calls
-		//getFavIcon();
+		getFavIcon();
 	};
 
 	const handleErrors = () => {
@@ -48,22 +49,33 @@
 		reload = {};
 	};
 
-	const getFavIcon = () => {
+	const getFavIcon = async () => {
 		let hostname = new URL(`https://${inputUrl}`).hostname;
-		fetch(`${proxy}https://${hostname}/favicon.ico`)
-			.then((response) => response.blob())
-			.then((blob) => {
-				var reader = new FileReader();
-				reader.onload = () => {
-					favicon = arrayBufferToBase64Img(reader.result as ArrayBuffer);
-				};
-				reader.readAsDataURL(blob);
-			});
+		const response = await fetch(`${proxy}https://${hostname}/favicon.ico`);
+		if(!response.ok) {
+			favicon = ""
+			return;
+		}
+		
+		const blob = await response.blob()
+		var reader = new FileReader();
+		reader.onload = () => {
+			console.log(reader.result);
+			
+			favicon = reader.result as string
+		};
+		reader.readAsDataURL(blob);
 	};
 </script>
 
 <App on:close {process}>
-	<div slot="icon"><Icon type="Globe" size="25" /></div>
+	<div slot="icon">
+		{#if favicon}
+		<img alt="Icon" src="{favicon}" height="25" width="25" />
+		{:else}
+		<Icon type="Globe" size="25" />
+		{/if}
+	</div>
 	<span slot="app-name">{process.name}</span>
 
 	<div slot="content" class="flex flex-col h-full bg-gray-800">
