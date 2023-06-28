@@ -5,17 +5,17 @@
 	import { arrayBufferToBase64Img } from '$lib/utils';
 	export let process: Process;
 
-	let inputUrl = (process.data as string) || 'www.google.com/webhp?igu=1';
+	let inputUrl = (process.data as string) || 'google.com/webhp?igu=1';
 	let historyIndex = 0;
 	let history: string[] = [inputUrl];
 	let reload = {};
 	let couldLoad = true;
 	let favicon = 'Globe';
 	let shouldProxy = false;
-	let proxy = 'https://corsproxy.io/?';
+	let proxy = 'https://runeharlyk.dk/proxy/';
 
 	const search = (event: KeyboardEvent) => {
-		if (event.key !== 'Enter') return;
+		if (event.key !== 'Enter' || !inputUrl) return;
 		history.push(inputUrl);
 		historyIndex++;
 	};
@@ -50,7 +50,7 @@
 
 	const getFavIcon = () => {
 		let hostname = new URL(`https://${inputUrl}`).hostname;
-		fetch(`https://${hostname}/favicon.ico`)
+		fetch(`${proxy}https://${hostname}/favicon.ico`)
 			.then((response) => response.blob())
 			.then((blob) => {
 				var reader = new FileReader();
@@ -100,7 +100,8 @@
 			<object
 				class="w-full h-full"
 				title="browser"
-				data="https://{history[historyIndex]}"
+				name={`${Date.now()}`}
+				data="{proxy}{history[historyIndex]}"
 				on:error={handleErrors}
 			/>
 		{/key}
