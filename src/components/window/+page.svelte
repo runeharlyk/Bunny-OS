@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Taskbar from './taskbar.svelte';
+	import Background from './background.svelte';
 	import TaskManager from '../app/taskManager/+page.svelte';
 	import Browser from '../app/browser/+page.svelte';
 	import { processes } from '../../store';
@@ -145,7 +146,7 @@
 	<meta name="description" content="Browser base OS" />
 </svelte:head>
 
-<main class="w-full h-full overflow-hidden bg-blue-950">
+<main class="w-full h-full overflow-hidden">
 	{#each $processes.filter(x => x.parent === instance_id) as process}
 		<svelte:component
 			this={process.component}
@@ -162,4 +163,5 @@
 		{/each}
 	</div>
 	<Taskbar instance_id={instance_id} />
+	<Background />
 </main>
