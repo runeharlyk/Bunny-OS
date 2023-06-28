@@ -68,7 +68,9 @@
 			{#each operators as operator, i}
 				<button
 					on:click={() => (calculation = operator.action(operator.key, calculation))}
-					class={i !== operators.length - 1 ? 'bg-slate-700' : 'bg-blue-500'}
+					class:bg-slate-700={i !== operators.length - 1}
+					class:bg-blue-500={i === operators.length - 1}
+					class="rounded-sm"
 				>
 					{format(operator.key)}
 				</button>
