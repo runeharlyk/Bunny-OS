@@ -25,7 +25,7 @@
 	draggable="true"
 >
 	<Icon type={app.icon} size="40" />
-	<div class="w-full text-ellipsis overflow-hidden">
+	<div class="w-full text-ellipsis overflow-hidden [text-shadow:_0_0_5px_rgb(0_0_0_/_100%)]">
 		{app.name}
 	</div>
 </button>
