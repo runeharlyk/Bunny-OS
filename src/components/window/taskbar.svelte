@@ -2,8 +2,30 @@
 	import { processes, focusedProcess } from '../../store';
 	import { SpeakerWave, Sun, ChatBubbleLeft } from 'svelte-heros';
 	import Icon from '../icon.svelte';
+	import { onDestroy, onMount } from 'svelte';
+	
+	export let instance_id:number
+	
+	onMount(() => {
+		clock()
+		clockTimer = setInterval(clock, 1000)
+	})
+	onDestroy(() => clearInterval(clockTimer))
 
-	export let instance_id:number;
+	let clockTimer:number
+	let time = "00:00" 
+	let date = "01/01/0001"
+
+	const clock = () => {
+		const now = new Date();
+		let h = now.getHours();
+		let m = now.getMinutes();
+		let hour = (h < 10) ? "0" + h : h;
+		let minute = (m < 10) ? "0" + m : m;
+		time = `${hour}:${minute}`
+
+		date = now.toLocaleDateString(navigator.language);
+	}
 </script>
 
 <div
@@ -30,8 +52,8 @@
 		<SpeakerWave />
 		<Sun />
 		<div class="flex flex-col items-center">
-			<div>16:58</div>
-			<div>15/04/2023</div>
+			<div>{time}</div>
+			<div>{date}</div>
 		</div>
 		<ChatBubbleLeft />
 	</div>
