@@ -64,7 +64,7 @@
 </script>
 
 <div
-	class="touch-none resize-none hover:resize w-1/3 h-1/3 absolute select-none transition-[transform,opacity] z-10"
+	class="touch-none resize-none hover:resize w-1/3 h-1/3 absolute select-none transition-[transform,opacity] z-10 shadow-2xl rounded-md overflow-hidden"
 	style="width:{fullScreen ? '100%' : `${width}px`}; 
 		height:{fullScreen ? 'calc(100% - 48px)' : `${height}px`}; 
 		left: {fullScreen ? 0 : left}px; 
