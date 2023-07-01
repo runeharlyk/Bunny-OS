@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import type { performancetab } from '../../../../models';
+	import type { performanceTab } from '../../../../models';
 	import Cpu from './cpu.svelte';
 	import Memory from './memory.svelte';
 	import Gpu from './gpu.svelte';
@@ -31,7 +31,7 @@
 		}
 	};
 
-	let tabs: performancetab[] = [
+	let tabs: performanceTab[] = [
 		{
 			name: 'CPU',
 			icon: 'Chart',

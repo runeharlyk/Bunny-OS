@@ -27,6 +27,6 @@ export type app = tab & {
   type: ProcessType;
 };
 
-export type performancetab = tab & {
+export type performanceTab = tab & {
   summary?: string;
 };
