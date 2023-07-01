@@ -6,7 +6,7 @@
 
 	let uptime: string;
 	let cores: number;
-	let speed: number;
+	let speed: number = 3;
 
 
 	onMount(async () => {
