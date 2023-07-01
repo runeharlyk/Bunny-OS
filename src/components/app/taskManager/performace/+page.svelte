@@ -4,6 +4,7 @@
 	import Cpu from './cpu.svelte';
 	import Memory from './memory.svelte';
 	import Gpu from './gpu.svelte';
+	import Network from './network.svelte';
 
 	let openIndex = 0;
 	let interval: number;
@@ -42,15 +43,15 @@
 			icon: 'Chart',
 			component: Memory
 		},
+		// {
+		// 	name: 'Disk',
+		// 	icon: 'Folder',
+		// 	component: Memory
+		// },
 		{
-			name: 'Disk',
+			name: 'Network',
 			icon: 'Folder',
-			component: Memory
-		},
-		{
-			name: 'Wi-Fi',
-			icon: 'Folder',
-			component: Memory
+			component: Network
 		},
 		{
 			name: 'GPU',
@@ -65,7 +66,11 @@
 	<div class="flex">
 		<div class="flex flex-col w-64 p-1">
 			{#each tabs as tab, i}
-				<button class="h-14 pl-4 text-left hover:bg-gray-700 capitalize" on:click={() => open(i)}>
+				<button 
+					class="h-14 pl-4 text-left hover:bg-slate-600 capitalize" 
+					class:bg-gray-700={i === openIndex} 
+					on:click={() => open(i)}
+				>
 					<div class="text-lg">{tab.name}</div>
 					<div class="text-sm">{tab.summary || ''}</div>
 				</button>
