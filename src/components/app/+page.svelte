@@ -76,7 +76,7 @@
 >
 	<Resizer bind:width bind:height bind:top_ab={top} bind:left_ab={left} />
 	<div
-		class="flex flex-col bg-gray-400 backdrop-filter backdrop-blur-2xl bg-opacity-10 h-full
+		class="flex flex-col bg-slate-700 backdrop-filter backdrop-blur-3xl bg-opacity-70 h-full
 		{fullScreen ? '' : 'rounded-lg'}"
 	>
 		<div class="flex">
