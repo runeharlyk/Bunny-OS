@@ -3,7 +3,7 @@
 	import Background from './background.svelte';
 	import TaskManager from '../app/taskManager/+page.svelte';
 	import Browser from '../app/browser/+page.svelte';
-	import { processes } from '../../store';
+	import { processes } from '../../stores';
 	import type { Process, app } from '../../models';
 	import CameraApp from '../app/camera/+page.svelte';
 	import FileExplore from '../app/fileExplore/+page.svelte';

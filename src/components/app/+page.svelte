@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { focusedProcess, processes } from '../../store';
+	import { focusedProcess, processes } from '../../stores';
 	import { XMark, Minus, Stop } from 'svelte-heros';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import type { Process } from '../../models';

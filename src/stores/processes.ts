@@ -1,5 +1,5 @@
 import { writable, type Writable } from 'svelte/store';
-import type { Process } from './models';
+import type { Process } from '../models';
 
 export const focusedProcess = writable("")
 
