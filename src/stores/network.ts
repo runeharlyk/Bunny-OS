@@ -1,4 +1,4 @@
-import { readable } from 'svelte/store';
+import { readable, writable } from 'svelte/store';
 
 export const Ipv4 = readable('127.0.0.1', function start(set) {
     if ( typeof window.RTCPeerConnection == 'undefined' )
@@ -21,3 +21,6 @@ export const Ipv4 = readable('127.0.0.1', function start(set) {
         if (!ips.some(e => e == ip)) ips.push(ip);
     };
 });
+
+export const SendSize = writable(0) 
+export const ReceivedSize = writable(0) 

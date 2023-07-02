@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { Ipv4 } from "../../../../stores";
+	import { humanFileSize } from "$lib/utils";
+	import { Ipv4, SendSize, ReceivedSize } from "../../../../stores";
 	let portfolio: HTMLCanvasElement;
 
-	let speed = 0;
-	let send = 0;
-	let receive = 0;
 </script>
 
 <div>
@@ -17,11 +15,11 @@
 		<div class="w-48">
 			<div class="flex flex-col">
 				<div class="text-xs text-slate-500">Send</div>
-				<div>{send} Kbps</div>
+				<div>{humanFileSize($SendSize)}</div>
 			</div>
 			<div class="flex flex-col">
 				<div class="text-xs text-slate-500">Receive</div>
-				<div>{receive} Kbps</div>
+				<div>{humanFileSize($ReceivedSize)}</div>
 			</div>
 		</div>
 		<div class="grid grid-cols-2 text-xs w-56 [&>*:nth-child(odd)]:text-slate-500">
