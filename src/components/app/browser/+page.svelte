@@ -97,7 +97,7 @@
 			<div
 				class="flex flex-1 bg-opacity-75 bg-gray-900 pl-2 rounded-full overflow-hidden items-center gap-2"
 			>
-				<div>🛈</div>
+				<div>{couldLoad ? "🔒" : "🛈"}</div>
 				<input type="text" class="flex-1 bg-gray-900" bind:value={inputUrl} on:keydown={search} />
 			</div>
 		</div>
