@@ -13,7 +13,6 @@
 	let freeSpace = 0;
 	let usedSpace = 0;
 	let totalSpace = 0;
-	let w = window as any;
 	let entries:Array<FileSystemDirectoryHandle> = [];
 	let usbDevices: USBDevice[] = [];
 
@@ -23,7 +22,6 @@
 		//entries = await dirHandle.entries();
 
 		let storage = navigator.storage;
-		let directoryHandle = await storage.getDirectory();
 		let persistent = await storage.persist();
 		let estimate = await storage.estimate();
 		totalSpace = estimate.quota ?? 0
@@ -46,7 +44,7 @@
 	});
 
 	const mount = async () => {
-		const folder = await w.showDirectoryPicker();	
+		const folder = await window.showDirectoryPicker();	
 		await openFolder(folder, true);
 	};
 
@@ -75,7 +73,6 @@
 			history.push(folder);
 			historyIndex++
 		}
-		console.log(history);
 		
 		let tempEntries = [];
 		for await (const [, value] of folder.entries()) {

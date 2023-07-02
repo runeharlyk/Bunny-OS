@@ -19,7 +19,7 @@ interface Array<T> {
 }
 
 declare global {
-    interface Window { MyNamespace: any; };
+    interface Window { showDirectoryPicker: any; };
 	interface Navigator { usb?: usb}
 	interface Performance {
 		memory?: {
