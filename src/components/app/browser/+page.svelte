@@ -12,7 +12,7 @@
 	let couldLoad = true;
 	let favicon = '';
 	let shouldProxy = false;
-	let proxy = 'https://runeharlyk.dk/proxy/';
+	let proxy = 'https://proxy.runeharlyk.dk/';
 
 	const search = (event: KeyboardEvent) => {
 		if (event.key !== 'Enter' || !inputUrl) return;
